@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Accordian</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="style.css">
+
+  </head>
+
+<body>
+    <div class="container">
+        <button class="accordion" id="bt1"></button>
+        <div class="accordion-content" id="content1">
+
+        </div>
+        <button class="accordion" id="bt2"></button>
+        <div class="accordion-content" id="content2">
+
+        </div>
+        <button class="accordion" id="bt3"></button>
+        <div class="accordion-content" id="content3">
+
+        </div>
+    </div>
+
+
+    <script src="style.js"></script>
+
+
+    <script>
+    loadXMLDoc() //calling function
+
+    function loadXMLDoc()
+    {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function()
+        {
+            if (xmlhttp.readyState == XMLHttpRequest.DONE)
+            {
+                if (xmlhttp.status == 200)
+                {
+                    var data = JSON.parse(xmlhttp.responseText);
+
+                    $("#bt1").html(data.blocks[0].heading );
+                    $("#bt2").html(data.blocks[1].heading );
+                    $("#bt3").html(data.blocks[2].heading );
+                    $("#content1").html('<p>' + data.blocks[0].content + '</p>');
+                    $("#content2").html('<p>' + data.blocks[1].content + '</p>');
+                    $("#content3").html('<p>' + data.blocks[2].content + '</p>');
+                }
+                else if (xmlhttp.status == 400)
+                {
+                    alert('There was an error 400');
+                }
+                else
+                {
+                    alert('something else other than 200 was returned');
+                }
+            }
+        };
+        xmlhttp.open("GET", "https://design.propcom.co.uk/buildtest/accordion-data.json", true);
+        xmlhttp.send();
+    }
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</body>
+
+</html>
