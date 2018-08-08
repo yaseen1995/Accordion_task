@@ -32,7 +32,7 @@
 
     function loadXMLDoc()
     {
-        var xmlhttp = new XMLHttpRequest();
+        var xmlhttp = new XMLHttpRequest(); // defining our request here
         xmlhttp.onreadystatechange = function()
         {
             if (xmlhttp.readyState == XMLHttpRequest.DONE)
@@ -41,12 +41,15 @@
                 {
                     var data = JSON.parse(xmlhttp.responseText);
 
-                    $("#bt1").html(data.blocks[0].heading );
-                    $("#bt2").html(data.blocks[1].heading );
-                    $("#bt3").html(data.blocks[2].heading );
-                    $("#content1").html('<p>' + data.blocks[0].content + '</p>');
-                    $("#content2").html('<p>' + data.blocks[1].content + '</p>');
-                    $("#content3").html('<p>' + data.blocks[2].content + '</p>');
+                  document.getElementById("bt1").innerHTML = data.blocks[0].heading;
+                  document.getElementById("bt2").innerHTML = data.blocks[1].heading;
+                  document.getElementById("bt3").innerHTML = data.blocks[2].heading;
+
+
+                  document.getElementById("content1").innerHTML = '<p>' + data.blocks[0].content + '</p>';
+                  document.getElementById("content2").innerHTML = '<p>' + data.blocks[1].content + '</p>';
+                  document.getElementById("content3").innerHTML = '<p>' + data.blocks[2].content + '</p>';
+
                 }
                 else if (xmlhttp.status == 400)
                 {
@@ -58,12 +61,10 @@
                 }
             }
         };
-        xmlhttp.open("GET", "https://design.propcom.co.uk/buildtest/accordion-data.json", true);
-        xmlhttp.send();
+        xmlhttp.open("GET", "https://design.propcom.co.uk/buildtest/accordion-data.json", true); // defining our request here too to get what we want
+        xmlhttp.send(); // Sends request to pull data from JSON file
     }
     </script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 </body>
 
